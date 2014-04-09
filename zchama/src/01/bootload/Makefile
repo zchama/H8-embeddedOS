@@ -12,9 +12,9 @@ OBJDUMP	= $(BINDER)/objdump
 RANLIB	= $(BINDER)/ranlib
 STRIP	= $(BINDER)/strip
 
-H8WRITE	= ../../tools/h8write/h8write
+H8WRITE	= ../../tools/kz_h8write/kz_h8write
 
-H8WRITE_SERDEV = /dev/cuad0  
+H8WRITE_SERDEV = /dev/tty.usbserial-FTK1PRAV  
 
 OBJS  	= vector.o startup.o main.o
 OBJS	+= lib.o serial.o
@@ -51,8 +51,7 @@ image		:	$(TARGET).mot
 
 # write to flash ROM
 write		:	$(TARGET).mot
-			$(H8WRITER) -3069 -f20 $(TARGET).mot $(H8WRITER_SERDEV)
+			$(H8WRITE) -3069 -f20 $(TARGET).mot $(H8WRITE_SERDEV)
 	
-clean		:	
-			rm -f $($OBJS) $(TARGET) $(TARGET).elf $(TARGET).mot
+clean		:	rm -f $($OBJS) $(TARGET) $(TARGET).elf $(TARGET).mot
 
