@@ -1,0 +1,30 @@
+/**
+ * OUTPUT_FORMAT ("elf32-h8300")
+ */
+OUTPUT_ARCH(h8300h)
+ENTRY("_start")
+
+SECTIONS{
+  . = 0x0; /* put the start address of memory*/
+
+  .vectors :{  /*interupt vector*/
+         vector.o(.data)
+  }
+ 
+  .text :{     /* text section*/
+         *(.text)
+  }
+  .rodata :{    /*rodata section*/
+         *(.strings)
+         *(.rodata)
+         *(.rodata.*)
+  }
+  .data :{     /* data section*/
+        *(.data)
+  }
+  .bss : {     /* BSS section*/
+       *(.bss)
+       *(COMMON)
+  }
+}
+
