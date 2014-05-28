@@ -43,7 +43,7 @@ int putxval(unsigned long value, int column){
     column++;
   }
   while( value|| column){
-    *(p--) = "01234567890abcdef"[value & 0xf];
+    *(p--) = "0123456789abcdef"[value & 0xf];
     value >>= 4;
   }
   if(column) column--;
