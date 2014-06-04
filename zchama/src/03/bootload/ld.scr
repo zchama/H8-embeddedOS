@@ -4,14 +4,14 @@
 OUTPUT_ARCH(h8300h)
 ENTRY("_start")
 
-MEMOEY{
+MEMORY{
   romall(rx)	: o = 0x000000, l = 0x080000 /*512KB*/
   vectors(r)	: o = 0x000000, l = 0x000100 /*top of ROM*/
   rom(rx)	: o = 0x000100, l = 0x07ff00
 
-  romall(rwx)	: o = 0xffbf20, l = 0x004000 /*16KB*/
+  ramall(rwx)	: o = 0xffbf20, l = 0x004000 /*16KB*/
   data(rwx)	: o = 0xfffc20, l = 0x000300
-  stack(rw)	: o = 0xfffff0, l = 0x000000 /*end of RAM*/
+  stack(rw)	: o = 0xffff00, l = 0x000000 /*end of RAM*/
 }
 
 
@@ -19,7 +19,7 @@ SECTIONS{
 
   .vectors :{  /*interupt vector*/
          vector.o(.data)
-  } > vectros
+  } > vectors
  
   .text :{     /* text section*/
          _text_start = . ;
@@ -33,16 +33,16 @@ SECTIONS{
          *(.rodata)
          *(.rodata.*)
          _erodata = .;
-  } > data
+  } > rom
 
   .data :{     /* data section*/
         _data_start = . ;
         *(.data)
-        _erodata = .;
+        _edata = .;
   } > data AT > rom
 
   .bss : {     /* BSS section*/
-       _bss_start = . ;)
+       _bss_start = . ;
        *(.bss)
        *(COMMON)
        _ebss = .;

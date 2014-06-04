@@ -14,7 +14,7 @@ STRIP	= $(BINDER)/strip
 
 H8WRITE	= ../../tools/kz_h8write/kz_h8write
 
-H8WRITE_SERDEV = /dev/tty.usbserial-FTK1PRAV  
+H8WRITE_SERDEV = /dev/tty.PL2303-000013FA  
 
 OBJS  	= vector.o startup.o main.o
 OBJS	+= lib.o serial.o

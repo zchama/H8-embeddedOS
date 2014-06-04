@@ -42,11 +42,11 @@ int putxval(unsigned long value, int column){
   if(!value && !column){
     column++;
   }
-  while( value|| column){
+  while (value || column){
     *(p--) = "0123456789abcdef"[value & 0xf];
     value >>= 4;
+    if(column) column--;
   }
-  if(column) column--;
   puts(p + 1);
   return 0;
 }
@@ -64,7 +64,7 @@ void* memset(void* b, int c, long len){
   for(; i < len; i++){
     p[i] = (char) c;
   }
-  return b;  
+  return b;
 }
 /**
  * @breif copy a data from source to destination
@@ -74,7 +74,7 @@ void* memset(void* b, int c, long len){
  * @return
  */
 void* memcpy(void* dst, const void* src, long len){
-  long i =0;
+  long i = 0;
   char* dst_p = dst;
   const char* src_p = src;
   for(; i < len; i++){

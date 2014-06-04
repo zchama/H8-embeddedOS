@@ -2,7 +2,7 @@
 	.section .text
 	.global _start
 _start:
-	mov.1	#0xffff00,sp
+	mov.1	#_stack,sp
 	jsr	@_main
 1:
 	bra	1b
